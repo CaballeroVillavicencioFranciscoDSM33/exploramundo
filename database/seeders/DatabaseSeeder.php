@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Activity;
@@ -15,21 +15,28 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Crear usuario administrador
-        User::factory()->create([
-            'name' => 'Administrador',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('admin123'),
-            'is_admin' => true,
-        ]);
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Administrador',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10),
+                'is_admin' => true
+            ]
+        );
 
-        // Crear usuario regular
-        User::factory()->create([
-            'name' => 'Cliente',
-            'email' => 'user@example.com',
-            'password' => Hash::make('user123'),
-            'is_admin' => false,
-        ]);
+        $user = User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Usuario Demo',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10),
+                'is_admin' => false
+            ]
+        );
+
 
         // Crear actividades con relaciones y algunas reservas
         Activity::factory(10)->create()->each(function ($activity) {
@@ -54,5 +61,3 @@ class DatabaseSeeder extends Seeder
         Promotion::factory()->count(3)->create();
     }
 }
-
-
