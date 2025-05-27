@@ -58,7 +58,7 @@ php artisan storage:link
 ### Opción B: Clonar desde repositorio (si aplica)
 
 ```bash
-git clone https://github.com/usuario/exploramundo.git
+git clone https://github.com/CaballeroVillavicencioFranciscoDSM33/exploramundo.git
 cd exploramundo
 composer install
 npm install
