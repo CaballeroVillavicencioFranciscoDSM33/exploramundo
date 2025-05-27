@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Crear usuarios
         $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             [
@@ -37,9 +38,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-
         // Crear actividades con relaciones y algunas reservas
-        Activity::factory(10)->create()->each(function ($activity) {
+        Activity::factory(10)->create()->each(function ($activity) use ($user) {
             $relatedIds = Activity::inRandomOrder()->where('id', '!=', $activity->id)->take(3)->pluck('id');
             $activity->related()->sync($relatedIds);
 
@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             if (rand(0, 1)) {
                 Reservation::create([
                     'activity_id' => $activity->id,
+                    'user_id' => $user->id,
                     'people' => rand(1, 5),
                     'reservation_date' => Carbon::now(),
                     'execution_date' => Carbon::now()->addDays(rand(2, 5)),
