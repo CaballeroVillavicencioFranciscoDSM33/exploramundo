@@ -105,7 +105,15 @@ Esto crea:
 - Usuario normal: **user@demo.com / password**
 - Actividades, promociones y reservas de ejemplo
 
----
+## Cuenta Usuario
+
+- user@example.com
+- password
+
+## Cuenta Admin
+
+- admin@example.com
+- password
 
 ## 5. Funcionalidades implementadas
 
