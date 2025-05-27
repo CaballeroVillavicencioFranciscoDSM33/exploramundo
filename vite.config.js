@@ -8,4 +8,5 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    base: '/build/', // Asegura rutas relativas correctas
 });
