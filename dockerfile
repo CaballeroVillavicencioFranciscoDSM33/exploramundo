@@ -1,3 +1,5 @@
+# Dockerfile optimizado para Laravel en Render
+
 # Etapa 1: PHP con Composer y Node
 FROM php:8.2-fpm
 
@@ -27,24 +29,18 @@ RUN composer install --no-dev --optimize-autoloader
 # Copiar el resto del código
 COPY . .
 
-# Copiar y generar .env si hace falta (o usa las Railway Variables directamente)
-# COPY .env.production .env
+# Establecer permisos
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Cache config
-RUN php artisan config:clear && php artisan config:cache
-
-# Migraciones y seeders
-RUN php artisan migrate --force
-RUN php artisan db:seed --force
-
-# Frontend (build de assets)
+# Construcción frontend (vite)
 RUN npm install && npm run build
 
-# Permisos correctos
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
+# Migraciones y seeders (muevelos aquí porque no puedes usar Pre-Deploy Command)
+RUN php artisan migrate --force && php artisan db:seed --force
 
-# Expone puerto 9000
+# Exponer puerto y permisos
 EXPOSE 9000
 
-# Arranque FPM
+# Iniciar PHP-FPM (entrypoint)
 CMD ["php-fpm"]
