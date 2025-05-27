@@ -197,9 +197,9 @@ Se incluyen pruebas con PHPUnit y Laravel Test Framework:
 
 ## 11. Autor
 
-**Alan David Caballero Villavicencio**  
+**Francisco Caballero Villavicencio**  
 Proyecto técnico Laravel 12 - 2025  
-Contacto: alan.dev@ejemplo.com
+Contacto: al222111282@gmail.com
 
 ---
 
