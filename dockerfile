@@ -39,6 +39,8 @@ RUN npm install && npm run build
 # Migraciones y seeders (muevelos aquí porque no puedes usar Pre-Deploy Command)
 RUN php artisan migrate --force && php artisan db:seed --force
 
+RUN php artisan config:clear && php artisan config:cache
+
 # Exponer puerto y permisos
 EXPOSE 9000
 
