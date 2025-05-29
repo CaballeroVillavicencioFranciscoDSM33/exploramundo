@@ -14,6 +14,6 @@ public function handle(Request $request, Closure $next): Response
             return $next($request);
         }
 
-        abort(403, 'Acceso no autorizado');
+        abort(403, message: 'Acceso no autorizado');
     }
 }

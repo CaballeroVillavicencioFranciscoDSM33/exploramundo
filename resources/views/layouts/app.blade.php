@@ -19,16 +19,16 @@
             color: #0d6efd;
         }
 
-        .swiper {
-            height: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
         .swiper-slide {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .swiper {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
         }
     </style>
 </head>
